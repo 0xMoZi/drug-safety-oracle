@@ -184,13 +184,13 @@ PUBLIC_RPC_URL=
 ACCOUNT=
 STRK_ADDR=0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
 ORACLE_CONTRACT=
-ORACLE_CLASS_HASH=
+ORACLE_CLASS_HASH=0x79e7cf27ef499e1e41e300887d2369cdae9e1d7d9651ddfa8c373ba2fb8613a
 
 # FDA + IPFS
 FDA_BASE=https://api.fda.gov/drug/enforcement.json
 IPFS_GATEWAY=
-PINATA_METADATA_URL=
-PINATA_UPLOAD=
+PINATA_METADATA_URL=https://api.pinata.cloud/pinning/hashMetadata
+PINATA_UPLOAD=https://api.pinata.cloud/pinning/pinJSONToIPFS
 PINATA_JWT=
 ```
 
@@ -214,6 +214,7 @@ make py-keygen-oracle
 # → creates signer/oracle_key.json (NEVER commit this file)
 
 # Step 2: Build and declare
+# declare contract again is optional, declare only when you modified the contract
 make build
 make declare-oracle
 # → copy class_hash to .env → ORACLE_CLASS_HASH
