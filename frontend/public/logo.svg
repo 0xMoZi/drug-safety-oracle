@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" width="220" height="200">
+
+  <!-- 6 lattice nodes -->
+  <circle cx="55" cy="10" r="5" fill="#1a1a1a"/>
+  <circle cx="92" cy="27" r="5" fill="#1a1a1a"/>
+  <circle cx="92" cy="73" r="5" fill="#1a1a1a"/>
+  <circle cx="55" cy="90" r="5" fill="#1a1a1a"/>
+  <circle cx="18" cy="73" r="5" fill="#1a1a1a"/>
+  <circle cx="18" cy="27" r="5" fill="#1a1a1a"/>
+
+  <!-- Outer hexagon ring -->
+  <polygon
+    points="55,10 92,27 92,73 55,90 18,73 18,27"
+    fill="none" stroke="#1a1a1a" stroke-width="2"
+  />
+
+  <!-- Diagonal cross connections — red -->
+  <line x1="55" y1="10" x2="92" y2="73" stroke="#cc0000" stroke-width="2"/>
+  <line x1="55" y1="10" x2="18" y2="73" stroke="#cc0000" stroke-width="2"/>
+  <line x1="92" y1="27" x2="18" y2="73" stroke="#cc0000" stroke-width="2"/>
+  <line x1="92" y1="27" x2="55" y2="90" stroke="#cc0000" stroke-width="2"/>
+  <line x1="18" y1="27" x2="92" y2="73" stroke="#cc0000" stroke-width="2"/>
+  <line x1="18" y1="27" x2="55" y2="90" stroke="#cc0000" stroke-width="2"/>
+
+  <!-- Center dot -->
+  <circle cx="55" cy="50" r="10" fill="#cc0000"/>
+  <circle cx="55" cy="50" r="5"  fill="white"/>
+
+</svg>

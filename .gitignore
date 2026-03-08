@@ -1,0 +1,20 @@
+target
+.snfoundry_cache/
+snfoundry_trace/
+coverage/
+profile/
+.env
+venv
+tests
+signer/oracle_key.json
+signer/deploy_info.json
+signer/__pycache__
+oracle/__pycache__
+oracle/oracle_cache*
+falcon_account.cairo
+signer/send_tx.py
+signer/falcon_wallet.py
+
+frontend/.env.local        # sudah ada .env.local.example, tapi .env.local sendiri harus di-ignore
+frontend/.next/            # Next.js build output
+frontend/node_modules/     # npm packages
