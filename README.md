@@ -24,7 +24,7 @@ No one can publish fake recall data to this contract — not without the Falcon-
 ## Project Structure
 
 ```
-drug_safety_oracle/
+drug-safety-oracle/
 ├── .env                          ← config (never commit)
 ├── .env.example
 ├── .gitignore
@@ -106,23 +106,23 @@ drug_safety_oracle/
 ```bash
 # s2morrow/falcon must be cloned in the same parent directory
 git clone https://github.com/starkware-bitcoin/s2morrow
-git clone https://github.com/0xMoZi/drug_safety_oracle
+git clone https://github.com/0xMoZi/drug-safety-oracle
 
 ls
-# s2morrow/  drug_safety_oracle/
+# s2morrow/  drug-safety-oracle/
 ```
 
 ### 2. Cairo / StarkNet Tools
 
 ```bash
-cd drug_safety_oracle
+cd drug-safety-oracle
 asdf install   # installs Scarb + sncast from .tool-versions
 make build     # scarb build — verify it compiles
 ```
 
 ### 3. Python
 
-Install venv in drug_safety_oracle directory
+Install venv in drug-safety-oracle directory
 
 ```bash
 python3 -m venv venv
@@ -222,7 +222,10 @@ make declare-oracle
 make deploy-oracle
 # → copy contract address to .env → ORACLE_CONTRACT
 
-# Step 4: Upload Falcon-512 public key to contract
+# Step 4: uncomment ORACLE_CONTRACT from signer/config.py and oracle/config.py
+ORACLE_CONTRACT     = _int("ORACLE_CONTRACT") # <- uncomment this after you deployed the contract
+
+# Step 5: Upload Falcon-512 public key to contract
 make py-deploy-oracle
 ```
 
@@ -231,6 +234,9 @@ make py-deploy-oracle
 ```bash
 # Preview — no TX sent
 make py-dry-run
+
+# Check recent recall
+make check-fda
 
 # Publish (default: 5 recalls)
 make py-publish
