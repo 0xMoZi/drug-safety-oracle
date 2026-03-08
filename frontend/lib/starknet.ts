@@ -375,6 +375,10 @@ function getProvider(): RpcProvider {
 }
 
 function getContract(): Contract {
+    if (!ORACLE_ADDRESS) {
+      throw new Error("Missing NEXT_PUBLIC_ORACLE_ADDRESS in environment variables");
+    }
+    
     if (!_contract) {
         _contract = new Contract({
             abi: ORACLE_ABI,
