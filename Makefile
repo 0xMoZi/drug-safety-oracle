@@ -28,7 +28,7 @@ deploy-oracle:
 	--arguments $(ORACLE_PK_HASH)
 
 py-deploy-oracle:
-	$(PYTHON) signer/deploy.py --address $(ORACLE_CONTRACT) --key signer/oracle_key.json
+	$(PYTHON) signer/deploy.py --address $(ORACLE_CONTRACT) --key signer/oracle_key.json --out signer/deploy_info.json
 
 check-fda:
 	curl "https://api.fda.gov/drug/enforcement.json?limit=5&sort=recall_initiation_date:desc" \
