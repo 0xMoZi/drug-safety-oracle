@@ -3,10 +3,10 @@ deploy.py — Generate sncast commands for upload PK to contract.
 
 Usage:
     python deploy.py --address 0x02cdd... --account <sncast-account>
-    python deploy.py --address 0x057683... --account <sncast-account> --key falcon_key.json
+    python deploy.py --address 0x057683... --account <sncast-account> --key oracle_key.json --out signer/deploy_info.json
 """
 
-import json, argparse, datetime
+import json, os, argparse, datetime
 from poseidon_py.poseidon_hash import poseidon_hash_many
 from config import FALCON_N, CHUNK_SIZE
 
@@ -38,7 +38,15 @@ if __name__ == "__main__":
     parser.add_argument("--address", required=True, help="Contract address")
     parser.add_argument("--account", default="mozi",           help="sncast account name")
     parser.add_argument("--key",     default="oracle_key.json", help="Keypair file")
+    parser.add_argument("--out", default="deploy_info.json", help="Output file path")
     args = parser.parse_args()
+
+    if os.path.exists(args.out):
+        print(f"⚠️  {args.out} already available!")
+        confirm = input("Re-Generate? (y/N): ").strip()
+        if confirm.lower() != "y":
+            print("Canceled.")
+            exit(0)
 
     pk, pk_hash = load_pk(args.key)
 
@@ -74,7 +82,7 @@ if __name__ == "__main__":
         print(f"  --calldata {calldata_str}")
         print()
 
-    with open("deploy_info.json", "w") as f:
+    with open(args.out, "w") as f:
         json.dump({
             "pk_hash":          hex(pk_hash),
             "contract_address": args.address,
@@ -85,4 +93,4 @@ if __name__ == "__main__":
             "deployed_at":      datetime.datetime.now(datetime.UTC).isoformat(),
         }, f, indent=2)
 
-    print("💾 Info saved to deploy_info.json")
+    print("💾 Info saved to: ", args.out)
