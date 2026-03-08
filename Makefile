@@ -5,6 +5,7 @@ ORACLE_CONTRACT  = $(shell grep -m1 '^ORACLE_CONTRACT=' .env | cut -d= -f2)
 ORACLE_CLASS_HASH= $(shell grep -m1 '^ORACLE_CLASS_HASH=' .env | cut -d= -f2)
 ORACLE_PK_HASH 	 = $(shell jq -r '.pk_hash' signer/oracle_key.json)
 AMOUNT_RECALL 	?= 5
+SALT 			?= 0x2
 
 build:
 	scarb build
@@ -15,6 +16,7 @@ dev:
 check-account:
 	cat ~/.starknet_accounts/starknet_open_zeppelin_accounts.json
 
+# declare contract again is optional, declare only when you modified the contract
 declare-oracle:
 	sncast --account $(ACCOUNT) declare --contract-name DrugSafetyOracle --network sepolia
 
@@ -25,7 +27,8 @@ deploy-oracle:
 	sncast --account $(ACCOUNT) deploy \
 	--network sepolia \
 	--class-hash $(ORACLE_CLASS_HASH)  \
-	--arguments $(ORACLE_PK_HASH)
+	--arguments $(ORACLE_PK_HASH) \
+	--salt $(SALT)
 
 py-deploy-oracle:
 	$(PYTHON) signer/deploy.py --address $(ORACLE_CONTRACT) --key signer/oracle_key.json --out signer/deploy_info.json
